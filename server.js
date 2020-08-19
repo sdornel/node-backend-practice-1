@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors')
 const port = process.env.PORT || 3000;
 
-app.use(cors()) // use cors??
+app.use(cors()) // use cors
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
@@ -13,10 +13,11 @@ app.get('/express_backend', (req, res) => {
     res.send(
         [
             { 
-                express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' 
+                express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT',
+                info: 'Node.js, Express, and Postgres API' 
             },
             {
-                lordOfTheRings: {
+                lordOfTheRings: { // fake database
                     author: "Tolkien",
                     pages: 1000
                 }
@@ -24,3 +25,15 @@ app.get('/express_backend', (req, res) => {
         ]
     );
 });
+
+// const express = require('express')
+// const bodyParser = require('body-parser')
+// const app = express()
+// const port = 3000
+
+// app.use(bodyParser.json())
+// app.use(
+//   bodyParser.urlencoded({
+//     extended: true,
+//   })
+// )
