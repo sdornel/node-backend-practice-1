@@ -48,7 +48,7 @@ const createUser = (request, response) => { // off script here too
     response.status(201).send(`User added with ID: ${result.insertId}`)
 }
 
-const updateUser = (request, response) => { // I think I went a little off script here
+const updateUser = (request, response) => { // I think I went a little off script here. also this is for a put request
     const id = parseInt(request.params.id)
     const { name, email, password } = request.body
     
