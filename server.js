@@ -88,8 +88,8 @@ app.get('/api/books', (req, res) => {
   Book.findAll().then(books => res.json(books))
 })
 
-// create a group
-app.post('/api/groups', (req, res) => { //
+// create a group // create a review
+app.post('/api/reviews', (req, res) => { //
   const body = req.body
   // either find a tag with name or create a new one
   const books = body.books.map(book => Book.findOrCreate({ where: { title: book.title, author: book.author, 
@@ -97,12 +97,15 @@ app.post('/api/groups', (req, res) => { //
                                        .spread((book, created) => book))
                                        
   User.findById(body.userId)
-      .then(() => Group.create(body))
-      .then(group => Promise.all(books).then(storedBooks => Group.addBooks(storedBooks)).then(() => group))
-      .then(group => Group.findOne({ where: {id: group.id}, include: [User, Book]}))
-      .then(groupWithAssociations => res.json(groupWithAssociations))
+      .then(() => Review.create(body))
+      .then(review => Promise.all(books).then(storedBooks => Review.addBooks(storedBooks)).then(() => review))
+      .then(review => Review.findOne({ where: {id: review.id}, include: [User, Book]}))
+      .then(reviewWithAssociations => res.json(reviewWithAssociations))
       .catch(err => res.status(400).json({ err: `User with id = [${body.userId}] doesn\'t exist.`}))
+      debugger
 })
+
+TO DO: FIGURE OUT HOW TO SEED DATABASE WITH DUMMY DATA
 
 
 // // console.log that your server is up and running
