@@ -102,10 +102,9 @@ app.post('/api/reviews', (req, res) => { //
       .then(review => Review.findOne({ where: {id: review.id}, include: [User, Book]}))
       .then(reviewWithAssociations => res.json(reviewWithAssociations))
       .catch(err => res.status(400).json({ err: `User with id = [${body.userId}] doesn\'t exist.`}))
-      debugger
 })
 
-TO DO: FIGURE OUT HOW TO SEED DATABASE WITH DUMMY DATA
+// TO DO: FIGURE OUT HOW TO SEED DATABASE WITH DUMMY DATA
 
 
 // // console.log that your server is up and running
